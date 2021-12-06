@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Home Page</title>
+     
+    <style type="text/css" media="screen">
+    html, body, #map {margin: 0;padding: 0;width: 100%;height: 100%;} 
+    </style>
+    <script src="https://apis.mapmyindia.com/advancedmaps/v1/9d7eb743d7c26f34ae0e02d9d5548463/map_load?v=1.3">
+    </script>
+</head>
+ 
+<body>
+    <!-- <div id="map">
+
+    </div> -->
+    <center>This is our home page.</center>
+    <% results.forEach((newpost)=>{ %>
+        <h1 style="font-size: 30px;"><%= newpost.name %> <%=newpost.latitude%> <%=newpost.longitude%></h1>
+   <% }); %>
+   
+   <% console.log('hey', results) %>
+</body>
+
+<script>
+    var map=new MapmyIndia.Map("map",{ center:[28.61, 77.23],zoomControl: true,hybrid:true });
+    var LatLng = [
+        ["marker2",28.607198, 28.607198],
+        ["marker3",28.619706, 77.197501],
+        ["marker4",28.618049, 77.223422],
+        ["marker5",28.627391, 77.222907],
+        ["marker6",28.632966, 77.206599],
+        ["marker7",28.615035, 77.227370]
+        ];
+
+        /*iterate on size of latitiude longitude set*/
+        // for (var i = 0; i < LatLng.length; i++) {
+        // new L.marker([LatLng[i][1],LatLng[i][2]])
+        //         .bindPopup(LatLng[i][0])
+        //         .addTo(map);
+        // }
+        console.log("ejs files");
+        
+    
+</script>
+ 
+</html>  

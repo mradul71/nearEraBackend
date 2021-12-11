@@ -76,25 +76,29 @@ app.use(express.json());
 //----------------------//
 
 
-app.get("/", async (req, res) => {
-    var userInfo=[]
-    var userLat = 28.878685, userLong=77.137452, people=[]
-    await userRef.once('value', function(snap) {
-        userInfo = Object.entries(snap.val()).map((e) => ( {dataUser: e[1]} ));
-    })
-    console.log(userInfo)
-    var objjj = {};
-    await userInfo.forEach(async (user) => {
-        objjj = await nearMe(user.dataUser, userLat, userLong)
-        if(objjj)
-            people.push(objjj)
-    })
+// app.get("/", async (req, res) => {
+//     var userInfo=[]
+//     var userLat = 28.878685, userLong=77.137452, people=[]
+//     await userRef.once('value', function(snap) {
+//         userInfo = Object.entries(snap.val()).map((e) => ( {dataUser: e[1]} ));
+//     })
+//     console.log(userInfo)
+//     var objjj = {};
+//     await userInfo.forEach(async (user) => {
+//         objjj = await nearMe(user.dataUser, userLat, userLong)
+//         if(objjj)
+//             people.push(objjj)
+//     })
 
-    if(people.length!=0){
-        console.log(people)
-    }
-    res.render('home', {title: "Announcement page", results: people});
-});
+//     if(people.length!=0){
+//         console.log(people)
+//     }
+//     res.render('home', {title: "Announcement page", results: people});
+// });
+
+app.get("/", (req, res) => {
+    res.send("HELLO");
+})
 
 app.post("/dataToFirebase", (req, res) => {
     console.log(req.body)
@@ -118,16 +122,16 @@ async function getter(id){
     return obj;
 }
 
-app.get("/:id", async (req, res) => {
-    console.log(req.params.id)
-    var profileData = await getter(req.params.id);;
-    while(!profileData){
-        profileData
-        console.log("llop")
-    }
-    console.log(profileData);
-    res.send(profileData);
-})
+// app.get("/:id", async (req, res) => {
+//     console.log(req.params.id)
+//     var profileData = await getter(req.params.id);;
+//     while(!profileData){
+//         profileData
+//         console.log("llop")
+//     }
+//     console.log(profileData);
+//     res.send(profileData);
+// })
 
 
 
@@ -171,6 +175,6 @@ app.get("/:id", async (req, res) => {
 // })
 
 
-app.listen("3000", function(req, res){
+app.listen(process.env.PORT||3000, function(req, res){
     console.log("Server started")
 })
